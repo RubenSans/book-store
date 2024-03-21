@@ -67,6 +67,4 @@ export class HomeComponent {
       url: 'https://www.casadellibro.com/libro-arcanum-ilimitado/9788413143408/12146476'
     },
   ];
-
-
 }

@@ -71,6 +71,56 @@ export class BooksComponent {
       "category": Category.Infantil,
       "image": "https://m.media-amazon.com/images/I/81uXgt4c0NL._SY466_.jpg",
       "sale": true
+    },
+    {
+      "reference": "TIEM01",
+      "name": "El tiempo que tuvimos",
+      "price": 9.99,
+      "autor": "Cherry Chic",
+      "description": "Una historia de aventuras y fantasía que te transportará a un mundo lleno de magia y peligros.",
+      "category": Category.Infantil,
+      "image": "https://m.media-amazon.com/images/I/41QOytwcDiL.jpg",
+      "sale": true
+    },
+    {
+      "reference": "AMOR01",
+      "name": "El amor en los tiempos del cólera",
+      "price": 9.99,
+      "autor": "Gabriel García Márquez",
+      "description": "Una historia de aventuras y fantasía que te transportará a un mundo lleno de magia y peligros.",
+      "category": Category.Infantil,
+      "image": "https://imagessl7.casadellibro.com/a/l/s5/97/9788466347297.webp",
+      "sale": false
+    },
+    {
+      "reference": "VINC01",
+      "name": "El código Da Vinci",
+      "price": 18.95,
+      "autor": "Dan Brown",
+      "description": "Una novela llena de acción y suspense que te mantendrá pegado a sus páginas hasta el final.",
+      "category": Category.Fantasia,
+      "image": "https://www.planetadelibros.com/usuaris/libros/thumbs/d0a7d172-4365-4625-99a5-4868259c35e5/d_295_510/portada_el-codigo-da-vinci_dan-brown_201706061655.webp",
+      "sale": true
+    },
+    {
+      "reference": "ALCH01",
+      "name": "El alquimista",
+      "price": 17.10,
+      "autor": "Paulo Coelho",
+      "description": "Una novela llena de acción y suspense que te mantendrá pegado a sus páginas hasta el final.",
+      "category": Category.Fantasia,
+      "image": "https://www.planetadelibros.com/usuaris/libros/thumbs/54e8361f-d68d-4462-84c6-d06ef130f5ae/d_295_510/portada_el-alquimista_paulo-coelho_201612191218.webp",
+      "sale": true
+    },
+    {
+      "reference": "PRIN01",
+      "name": "El principito",
+      "price": 6.60,
+      "autor": "Antoine de Saint-Exupéry",
+      "description": "Una novela llena de acción y suspense que te mantendrá pegado a sus páginas hasta el final.",
+      "category": Category.Infantil,
+      "image": "https://m.media-amazon.com/images/I/714Hvb52n-L._SY466_.jpg",
+      "sale": false
     }
   ];
 

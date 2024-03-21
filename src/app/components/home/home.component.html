@@ -22,7 +22,7 @@
       <div class="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @for (book of booksHome; track book) {
         <div class="bg-gray-800 p-5 rounded-lg flex flex-col items-center sm:max-w-full">
-          <img src="{{book.image}}" alt="Book image" class="h-96 w-64 mb-2">
+          <img src="{{book.image}}" alt="Book image" class="rounded-lg h-96 w-64 mb-2">
           <h3 class="text-2xl font-bold m-3 overflow-hidden whitespace-nowrap text-ellipsis max-w-72 sm:max-w-full px-10"
             title="{{book.title}}">{{book.title}}</h3>
           <p class="mb-5" title="{{book.author}}">{{book.author}}</p>
