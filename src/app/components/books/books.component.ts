@@ -78,7 +78,11 @@ export class BooksComponent {
     this.books = this.addBookService.librosSignal();
     
     //testing COMMENT
-    // this.books.push(...this.bookTestArray);
+    this.bookTestArray.forEach(testBook => {
+      if (!this.books.find(book => book.reference === testBook.reference)) {
+        this.books.push(testBook);
+      }
+    });
 
     this.filteredBooks = this.books;
   }
