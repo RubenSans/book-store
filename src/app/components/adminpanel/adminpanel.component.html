@@ -1,0 +1,83 @@
+<div class="bg-slate-700 p-14">
+  <div class="max-w-xl mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form [formGroup]="bookForm" class="space-y-4" (ngSubmit)="onSubmit()">
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="reference">Referencia *</label>
+        <input formControlName="reference" id="reference" type="text" class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none
+          focus:shadow-outline" (input)="searchReference()">
+        <div *ngIf="bookForm.get('reference')?.errors && bookForm.get('reference')?.touched">
+          <p *ngIf="bookForm.get('reference')?.hasError('required')" class="text-red-500">La referencia es obligatoria
+          </p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre *</label>
+        <input formControlName="name" id="name" type="text"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div *ngIf="bookForm.get('name')?.errors && bookForm.get('name')?.touched">
+          <p *ngIf="bookForm.get('name')?.hasError('required')" class="text-red-500">El nombre es obligatorio</p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Precio *</label>
+        <input formControlName="price" id="price" type="number"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div *ngIf="bookForm.get('price')?.errors && bookForm.get('price')?.touched">
+          <p *ngIf="bookForm.get('price')?.hasError('required')" class="text-red-500">El precio es obligatorio</p>
+          <p *ngIf="bookForm.get('price')?.hasError('min')" class="text-red-500">El precio debe ser mayor o igual a 0
+          </p>
+          <p *ngIf="bookForm.get('price')?.hasError('pattern')" class="text-red-500">El precio debe ser un número
+            positivo</p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="autor">Autor *</label>
+        <input formControlName="autor" id="autor" type="text"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div *ngIf="bookForm.get('autor')?.errors && bookForm.get('autor')?.touched">
+          <p *ngIf="bookForm.get('autor')?.hasError('required')" class="text-red-500">El autor es obligatorio</p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción *</label>
+        <textarea formControlName="description" id="description"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+        <div *ngIf="bookForm.get('description')?.errors && bookForm.get('description')?.touched">
+          <p *ngIf="bookForm.get('description')?.hasError('required')" class="text-red-500">La descripción es
+            obligatoria</p>
+          <p *ngIf="bookForm.get('description')?.hasError('maxlength')" class="text-red-500">La descripción debe tener
+            como máximo 100 carácteres</p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="category">Categoría *</label>
+        <select formControlName="category" id="category"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <div *ngIf="bookForm.get('category')?.errors && bookForm.get('category')?.touched">
+          <p *ngIf="bookForm.get('category')?.hasError('required')" class="text-red-500">La categoría es obligatoria</p>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen URL *</label>
+        <input formControlName="image" id="image" type="text"
+          class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div *ngIf="bookForm.get('image')?.errors && bookForm.get('image')?.touched">
+          <p *ngIf="bookForm.get('image')?.hasError('required')" class="text-red-500">La imagen es obligatoria</p>
+          <p *ngIf="bookForm.get('image')?.hasError('invalidUrl')" class="text-red-500">La URL de la imagen no es válida (http required)</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <input formControlName="sale" id="sale" type="checkbox"
+          class="form-checkbox h-5 w-5 text-indigo-600 cursor-pointer">
+        <label class="ml-2 text-gray-700 cursor-pointer" for="sale">Rebajado</label>
+      </div>      
+      <button type="submit" [disabled]="!bookForm.valid"
+        [class]="!bookForm.valid ? 'bg-gray-500 cursor-not-allowed' : ' hover:bg-blue-700 '"
+        class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        {{isEdit? 'Editar libro' : 'Agregar libro'}}
+      </button>
+    </form>
+  </div>
+</div>
