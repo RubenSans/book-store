@@ -60,7 +60,7 @@ export class AdminpanelComponent {
   
   onSubmit() {
     if (this.bookForm.valid) {
-      if (this.isEdit) {
+      if (this.isEdit) { 
         console.log('Updating book');
         this.updateBook();
       } else {
