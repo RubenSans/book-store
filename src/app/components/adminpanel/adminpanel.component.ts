@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Book, Category } from '../interfaces/book';
+import { Book, Category } from '../../interfaces/book';
 import { AddbookService } from '../../servicios/addbook.service';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-adminpanel',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule, PopupComponent],
   templateUrl: './adminpanel.component.html',
   styleUrl: './adminpanel.component.css'
 })
@@ -17,6 +18,9 @@ export class AdminpanelComponent {
 
   isEdit: boolean = false;
   editBookIndex: number = -1;
+
+  showPopup: boolean = false;
+  popupMessage: string = '';
 
   constructor(private addBookService: AddbookService) {
     this.bookForm = new FormGroup({
@@ -30,12 +34,12 @@ export class AdminpanelComponent {
       image: new FormControl('', [Validators.required, this.httpValidator])
     });
   }
-  
-  httpValidator(campo: FormControl): {[key: string]: any} | null {
+
+  httpValidator(campo: FormControl): { [key: string]: any } | null {
     if (campo.value && (campo.value.startsWith('http') || campo.value.startsWith('https'))) {
-      return null; 
+      return null;
     } else {
-      return { 'invalidUrl': { value: campo.value } }; 
+      return { 'invalidUrl': { value: campo.value } };
     }
   }
 
@@ -52,23 +56,31 @@ export class AdminpanelComponent {
 
   categories = Object.values(Category);
 
-  books: Book[] = [];  
+  books: Book[] = [];
 
   ngOnInit(): void {
     this.books = this.addBookService.librosSignal();
   }
-  
+
   onSubmit() {
     if (this.bookForm.valid) {
-      if (this.isEdit) { 
+      this.popupMessage = this.isEdit ? 'Book updated succesfully' : 'Book added succesfully';
+
+      if (this.isEdit) {
         console.log('Updating book');
         this.updateBook();
       } else {
         this.addNewBook();
       }
     }
+
+    this.showPopup = true;
+
+    setTimeout(() => {
+      this.showPopup = false;
+    }, 3000);
   }
-  
+
   addNewBook() {
     const newBook: Book = this.createBookFromForm();
 
@@ -78,7 +90,7 @@ export class AdminpanelComponent {
 
     this.addBookService.librosSignal.set(this.books);
   }
-  
+
   updateBook() {
     const updatedBook: Book = this.createBookFromForm();
     this.books[this.editBookIndex] = updatedBook;
@@ -87,7 +99,7 @@ export class AdminpanelComponent {
     this.editBookIndex = -1;
     this.bookForm.reset();
   }
-  
+
   createBookFromForm(): Book {
     return {
       reference: this.bookForm.value.reference ? this.bookForm.value.reference : '',
@@ -100,7 +112,7 @@ export class AdminpanelComponent {
       image: this.bookForm.value.image ? this.bookForm.value.image : ''
     };
   }
-  
+
   searchReference() {
     const reference = this.bookForm.value.reference;
     const index = this.books.findIndex(book => book.reference === reference);
@@ -111,7 +123,7 @@ export class AdminpanelComponent {
       this.fillFormWithBook(bookToEdit);
     }
   }
-  
+
   fillFormWithBook(book: Book) {
     this.bookForm.patchValue({
       reference: book.reference,

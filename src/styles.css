@@ -12,3 +12,16 @@ html {
     backdrop-filter: blur(10px);
     border: 1.5px solid rgba(209, 213, 219, 0.3);
 }
+
+.popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+  

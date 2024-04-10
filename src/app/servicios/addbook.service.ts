@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Book } from '../components/interfaces/book';
+import { Book } from '../interfaces/book';
 
 @Injectable({
   providedIn: 'root'

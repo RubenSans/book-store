@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Book, Category } from '../interfaces/book';
+import { Book, Category } from '../../interfaces/book';
 import { AddbookService } from '../../servicios/addbook.service';
 import { FormsModule } from '@angular/forms';
 
@@ -12,13 +12,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './books.component.css'
 })
 export class BooksComponent {
-  
+
   books: Book[] = [];
 
   filteredBooks: Book[] = [];
   searchTerm: string = '';
 
-  constructor(private addBookService: AddbookService) {}
+  constructor(private addBookService: AddbookService) { }
 
   //testing
   bookTestArray: Book[] = [
@@ -126,7 +126,7 @@ export class BooksComponent {
 
   ngOnInit(): void {
     this.books = this.addBookService.librosSignal();
-    
+
     //testing COMMENT
     this.bookTestArray.forEach(testBook => {
       if (!this.books.find(book => book.reference === testBook.reference)) {
@@ -142,5 +142,5 @@ export class BooksComponent {
       (book.name.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
       (book.autor.toLowerCase().includes(this.searchTerm.toLowerCase()))
     );
-  }  
+  }
 }
