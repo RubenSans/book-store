@@ -14,10 +14,13 @@
                     <p class="text-slate-200 text-lg text-center overflow-hidden whitespace-nowrap text-ellipsis max-w-60">{{ book.autor }}</p>
                     <p class="text-slate-200 text-lg my-3 text-center overflow-hidden whitespace-nowrap text-ellipsis max-w-60">Género: {{ book.category }}</p>
                     <p class="mb-5 text-xl font-bold text-orange-500 text-center overflow-hidden whitespace-nowrap text-ellipsis max-w-60" title="{{book.price}}">
-                        {{ book.sale ? (book.price * 0.8).toFixed(2) : book.price.toFixed(2) }} € 
-                        <span *ngIf="book.sale" class="text-xs text-gray-400 line-through">{{ book.price.toFixed(2) }} €</span>
+                        {{ book.sale === 1 ? (book.price * 0.8).toFixed(2) : book.price.toFixed(2) }} € 
+                        <span *ngIf="book.sale === 1" class="line-through text-slate-200">{{ book.price.toFixed(2) }} €</span>
                     </p>
-                    <button class="bg-slate-700 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-slate-900">Comprar</button>
+                    <div class="flex gap-4">
+                        <button class="bg-slate-700 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-slate-900">Comprar</button>
+                        <button (click)="deleteBook(book.reference)" class="bg-red-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-red-600">Borrar</button>
+                    </div>
                 </div>
             </div>
         </div>

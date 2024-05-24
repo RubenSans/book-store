@@ -37,6 +37,6 @@ export interface Book {
     autor: string;
     description: string;
     category: Category; 
-    sale: boolean;
+    sale: number;
     image: string;
 }

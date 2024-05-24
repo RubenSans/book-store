@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Book, Category } from '../../interfaces/book';
@@ -23,6 +23,9 @@ export class AdminpanelComponent {
   popupMessage: string = '';
 
   constructor(private addBookService: AddbookService) {
+
+    effect(() => { this.books = this.addBookService.librosSignal(); });
+
     this.bookForm = new FormGroup({
       reference: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
@@ -30,7 +33,7 @@ export class AdminpanelComponent {
       autor: new FormControl('', Validators.required),
       description: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       category: new FormControl('', Validators.required),
-      sale: new FormControl(false),
+      sale: new FormControl(0),
       image: new FormControl('', [Validators.required, this.httpValidator])
     });
   }
@@ -50,7 +53,7 @@ export class AdminpanelComponent {
     autor: '',
     description: '',
     category: Category.Romance,
-    sale: false,
+    sale: 0,
     image: ''
   };
 
@@ -86,6 +89,8 @@ export class AdminpanelComponent {
 
     this.books.push(newBook);
 
+    this.addBookService.createBook(newBook);
+
     this.bookForm.reset();
 
     this.addBookService.librosSignal.set(this.books);
@@ -98,6 +103,7 @@ export class AdminpanelComponent {
     this.isEdit = false;
     this.editBookIndex = -1;
     this.bookForm.reset();
+    this.addBookService.updateBook(updatedBook);
   }
 
   createBookFromForm(): Book {
@@ -108,7 +114,7 @@ export class AdminpanelComponent {
       autor: this.bookForm.value.autor ? this.bookForm.value.autor : '',
       description: this.bookForm.value.description ? this.bookForm.value.description : '',
       category: this.bookForm.value.category ? this.bookForm.value.category : '',
-      sale: this.bookForm.value.sale ? this.bookForm.value.sale : false,
+      sale: this.bookForm.value.sale ? this.bookForm.value.sale : 0,
       image: this.bookForm.value.image ? this.bookForm.value.image : ''
     };
   }
